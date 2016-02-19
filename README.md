@@ -7,20 +7,26 @@ Installation on LxPlus SL machine:
 ----------------------------------
 
 First, set FCCSW environment (i.e. paths to FCC-EDM and PODIO):
+
     cd ${FCCSW}
     . init.sh
     cd -
 
 Second, set ROOTSYS variable:
+
     . setup.sh
 
 At last, build the software using CMake
+
     mkdir build
     cd build/
     cmake ..
     make install
 
 Installation procedure will install the executable to bin and link it to your ${HOME}/bin directory
+
+Run:
+----
 
 To run the code, use help first to see all options:
 
