@@ -38,9 +38,9 @@
 #include "datamodel/TagCollection.h"
 #include "datamodel/MET.h"
 #include "datamodel/METCollection.h"
-#include "datamodel/ParticleMCParticleAssociation.h"
-#include "datamodel/GenJetParticleAssociation.h"
-#include "datamodel/GenJetTagAssociation.h"
+#include "datamodel/ParticleMCParticleAssociationCollection.h"
+#include "datamodel/GenJetParticleAssociationCollection.h"
+#include "datamodel/GenJetTagAssociationCollection.h"
 
 // ROOT
 #include "TCanvas.h"
@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
     const fcc::ParticleCollection*   colRecMuons(nullptr);
     const fcc::ParticleCollection*   colRecElectrons(nullptr);
     const fcc::ParticleCollection*   colRecCharged(nullptr);
-    const fcc::ParticleCollection*   colRecNeutral(nullptr);
+    //const fcc::ParticleCollection*   colRecNeutral(nullptr);
     const fcc::ParticleCollection*   colRecPhotons(nullptr);
     const fcc::GenJetCollection*     colRecJets(nullptr);
     const fcc::TagCollection*        colRecBTags(nullptr);
@@ -172,7 +172,7 @@ int main(int argc, char* argv[]) {
     const fcc::ParticleMCParticleAssociationCollection* acolRecMuonsToMC(nullptr);
     const fcc::ParticleMCParticleAssociationCollection* acolRecElectronsToMC(nullptr);
     const fcc::ParticleMCParticleAssociationCollection* acolRecChargedToMC(nullptr);
-    const fcc::ParticleMCParticleAssociationCollection* acolRecNeutralToMC(nullptr);
+    //const fcc::ParticleMCParticleAssociationCollection* acolRecNeutralToMC(nullptr);
     const fcc::ParticleMCParticleAssociationCollection* acolRecPhotonsToMC(nullptr);
     const fcc::GenJetParticleAssociationCollection*     acolRecJetsToMC(nullptr);
     const fcc::GenJetTagAssociationCollection*          acolRecJetsToBTags(nullptr);
@@ -183,21 +183,21 @@ int main(int argc, char* argv[]) {
     bool colRecMuonsOK     = store.get("recMuons"     , colRecMuons);
     bool colRecElectronsOK = store.get("recElectrons" , colRecElectrons);
     bool colRecChargedOK   = store.get("recCharged"   , colRecCharged);
-    bool colRecNeutralOK   = store.get("recNeutral"   , colRecNeutral);
+    //bool colRecNeutralOK   = store.get("recNeutral"   , colRecNeutral);
     bool colRecPhotonsOK   = store.get("recPhotons"   , colRecPhotons);
     bool colRecJetsOK      = store.get("recJets"      , colRecJets);
     bool colRecBTagsOK     = store.get("recBTags"     , colRecBTags);
     bool colRecTauTagsOK   = store.get("recTauTags"   , colRecTauTags);
     bool colRecMETsOK      = store.get("recMETs"      , colRecMETs);
 
-//    bool acolRecMuonsToMCOK     = store.get("recMuonsToMC"     , acolRecMuonsToMC);
-//    bool acolRecElectronsToMCOK = store.get("recElectronsToMC" , acolRecElectronsToMC);
-//    bool acolRecChargedToMCOK   = store.get("recChargedToMC"   , acolRecElectronsToMC);
-//    bool acolRecNeutralToMCOK   = store.get("recNeutralToMC"   , acolRecElectronsToMC);
-//    bool acolRecPhotonsToMCOK   = store.get("recPhotonsToMC"   , acolRecElectronsToMC);
-//    bool acolRecJetsToMCOK      = store.get("recJetsToMC"      , acolRecElectronsToMC);
-//    bool acolRecJetsToBTagsOK   = store.get("recJetsToBTags"   , acolRecElectronsToMC);
-//    bool acolRecJetsToTauTagsOK = store.get("recJetsToTauTags" , acolRecElectronsToMC);
+    bool acolRecMuonsToMCOK     = store.get("recMuonsToMC"     , acolRecMuonsToMC);
+    bool acolRecElectronsToMCOK = store.get("recElectronsToMC" , acolRecElectronsToMC);
+    bool acolRecChargedToMCOK   = store.get("recChargedToMC"   , acolRecChargedToMC);
+    //bool acolRecNeutralToMCOK   = store.get("recNeutralToMC"   , acolRecNeutralToMC);
+    bool acolRecPhotonsToMCOK   = store.get("recPhotonsToMC"   , acolRecPhotonsToMC);
+    bool acolRecJetsToMCOK      = store.get("recJetsToMC"      , acolRecJetsToMC);
+    bool acolRecJetsToBTagsOK   = store.get("recJetsToBTags"   , acolRecJetsToBTags);
+    bool acolRecJetsToTauTagsOK = store.get("recJetsToTauTags" , acolRecJetsToTauTags);
 
     if (colGenParticlesOK &&
         colGenVerticesOK &&
@@ -209,16 +209,15 @@ int main(int argc, char* argv[]) {
         colRecJetsOK &&
         colRecBTagsOK &&
         colRecTauTagsOK &&
-        colRecMETsOK //&&
-//        acolRecMuonsToMCOK &&
-//        acolRecElectronsToMCOK &&
-//        acolRecChargedToMCOK &&
-//        acolRecNeutralToMCOK &&
-//        acolRecPhotonsToMCOK &&
-//        acolRecJetsToMCOK &&
-//        acolRecJetsToBTagsOK &&
-//        acolRecJetsToTauTagsOK
-        ) {
+        colRecMETsOK &&
+        acolRecMuonsToMCOK &&
+        acolRecElectronsToMCOK &&
+        acolRecChargedToMCOK &&
+        //acolRecNeutralToMCOK &&
+        acolRecPhotonsToMCOK &&
+        acolRecJetsToMCOK &&
+        acolRecJetsToBTagsOK &&
+        acolRecJetsToTauTagsOK ) {
 
       std::cout << "Event: "             << iEvent << std::endl;
       std::cout << " -> #GenParticles: " << colGenParticles->size()<< std::endl;
@@ -232,7 +231,14 @@ int main(int argc, char* argv[]) {
       std::cout << " -> #RecTuaTags:   " << colRecTauTags->size()  << std::endl;
       std::cout << " -> #RecMETs:      " << colRecMETs->size()     << std::endl;
 
-      //std::cout << " -> #RelMuons:     " << acolRecMuonsToMC->size()     << std::endl;
+      std::cout << " -> #RelMuonsToMC:     " << acolRecMuonsToMC->size()     << std::endl;
+      std::cout << " -> #RelElectronsToMC: " << acolRecElectronsToMC->size() << std::endl;
+      std::cout << " -> #RelChargedToMC:   " << acolRecChargedToMC->size()   << std::endl;
+      //std::cout << " -> #RelNeutronsToMC:  " << acolRecNeutralToMC->size()   << std::endl;
+      std::cout << " -> #RelPhotonsToMC:   " << acolRecPhotonsToMC->size()   << std::endl;
+      std::cout << " -> #RelJetsToMC:      " << acolRecJetsToMC->size()      << std::endl;
+      std::cout << " -> #RelJetsToBTags:   " << acolRecJetsToBTags->size()   << std::endl;
+      std::cout << " -> #RelJetsToTauTags: " << acolRecJetsToTauTags->size() << std::endl;
 
       std::cout << std::endl;
       std::cout << "GenParticles: " << std::endl;
@@ -256,10 +262,97 @@ int main(int argc, char* argv[]) {
                   << " Pz: "       << std::setprecision(2) << std::setw(9) << iPart->Core().P4.Pz
                   << " E: "        << std::setprecision(2) << std::setw(9) << partE
                   << " M: "        << std::setprecision(2) << std::setw(9) << iPart->Core().P4.Mass;
+        if (iPart->StartVertex().isAvailable()) {
+          std::cout << " Vx: "       << std::setprecision(2) << std::setw(9) << iPart->StartVertex().Position().X
+                    << " Vy: "       << std::setprecision(2) << std::setw(9) << iPart->StartVertex().Position().Y
+                    << " Vz: "       << std::setprecision(2) << std::setw(9) << iPart->StartVertex().Position().Z
+                    << " T: "        << std::setprecision(2) << std::setw(9) << iPart->StartVertex().Ctau();
+        }
+        if (iPart->EndVertex().isAvailable()) {
+          std::cout << " Vx: "       << std::setprecision(2) << std::setw(9) << iPart->EndVertex().Position().X
+                    << " Vy: "       << std::setprecision(2) << std::setw(9) << iPart->EndVertex().Position().Y
+                    << " Vz: "       << std::setprecision(2) << std::setw(9) << iPart->EndVertex().Position().Z
+                    << " T: "        << std::setprecision(2) << std::setw(9) << iPart->EndVertex().Ctau();
+        } // GenParticles
         std::cout << std::endl;
       }
       std::cout << std::endl;
 
+      std::cout << "RecJets: " << std::endl;
+      idPart = 0;
+      for (auto& iPart=colRecJets->begin(); iPart!=colRecJets->end(); ++iPart) {
+
+        idPart++;
+        double recE = sqrt(iPart->Core().P4.Px  *iPart->Core().P4.Px +
+                           iPart->Core().P4.Py  *iPart->Core().P4.Py +
+                           iPart->Core().P4.Pz  *iPart->Core().P4.Pz +
+                           iPart->Core().P4.Mass*iPart->Core().P4.Mass);
+
+        std::cout << " RecJet: "
+                  << " Id: "       << std::setw(3)  << idPart
+                  << " Bits: "     << std::setw(2)  << iPart->Core().Bits
+                  << std::scientific
+                  << " Px: "       << std::setprecision(2) << std::setw(9) << iPart->Core().P4.Px
+                  << " Py: "       << std::setprecision(2) << std::setw(9) << iPart->Core().P4.Py
+                  << " Pz: "       << std::setprecision(2) << std::setw(9) << iPart->Core().P4.Pz
+                  << " E: "        << std::setprecision(2) << std::setw(9) << recE
+                  << " M: "        << std::setprecision(2) << std::setw(9) << iPart->Core().P4.Mass;
+        std::cout << std::endl;
+
+        // Relation jet to MC
+        double totSimE= 0;
+        int    refID  = 0;
+        for (auto& iRel=acolRecJetsToMC->begin(); iRel!=acolRecJetsToMC->end(); ++iRel) {
+
+          if (iRel->Jet().getObjectID().index==iPart->getObjectID().index) {
+
+            refID++;
+            double simE   = sqrt(iRel->Particle().Core().P4.Px  *iRel->Particle().Core().P4.Px +
+                                 iRel->Particle().Core().P4.Py  *iRel->Particle().Core().P4.Py +
+                                 iRel->Particle().Core().P4.Pz  *iRel->Particle().Core().P4.Pz +
+                                 iRel->Particle().Core().P4.Mass*iRel->Particle().Core().P4.Mass);
+            totSimE += simE;
+            std::cout << "  RefId: " << std::setw(3)            << refID
+                      << " Rel E: "  << std::setprecision(2)
+                                     << std::scientific
+                                     << std::setw(9) << simE    << " "
+                                     << std::setw(9) << totSimE << " <-> "
+                                     << std::setw(9) << recE
+                                     << std::fixed
+                                     << std::endl;
+          }
+        } // Relation jets to MC
+
+        // Relation jet to BTag
+        refID  = 0;
+        std::cout << std::endl;
+        for (auto& iRel=acolRecJetsToBTags->begin(); iRel!=acolRecJetsToBTags->end(); ++iRel) {
+
+          if (iRel->Jet().getObjectID().index==iPart->getObjectID().index) {
+
+            refID++;
+            std::cout << "  RefId: " << std::setw(3)         << refID
+                      << " BTag: "   << std::setprecision(2) << iRel->Tag().Value()
+                                     << std::endl;
+          }
+        } // Relation jets to BTag
+
+        // Relation jet to TauTag
+        refID  = 0;
+        std::cout << std::endl;
+        for (auto& iRel=acolRecJetsToTauTags->begin(); iRel!=acolRecJetsToTauTags->end(); ++iRel) {
+
+          if (iRel->Jet().getObjectID().index==iPart->getObjectID().index) {
+
+            refID++;
+            std::cout << "  RefId: " << std::setw(3)         << refID
+                      << " TauTag: " << std::setprecision(2) << iRel->Tag().Value()
+                                     << std::endl;
+          }
+        } // Relation jets to TauTag
+        std::cout << std::endl;
+
+      } // RecJets
     }
     else {
 
